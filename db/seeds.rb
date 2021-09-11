@@ -8,21 +8,22 @@
 
 ###################################
 Category.destroy_all
+Genre.destroy_all
+Rating.destroy_all
+Review.destroy_all
+Program.destroy_all
 
 Category.create([{ name: 'Movies' } , { name: 'TV Show' }])
 puts "Seeding category..."
 ###################################
-Genre.destroy_all
 
 Genre.create([{ name: 'Adventure' } , { name: 'Scifi' } , { name: "Children & Family Movies" } , { name: "Classic" } , { name: "Comedies" } , { name: "Drama" } , { name: "Romantic" } , { name: "Horror" } , { name: "Sports" } , { name: "Documentaires" }])
 puts "Seeding genre..."
 ###################################
-Rating.destroy_all
 
 Rating.create([{ rating: "G: General Audiences" } , { rating: "PG: Parental Guidance Suggested" }, { rating: "PG-13: Parents Strongly Cautioned" } , { rating: "R: Restricted" }, { rating: "TV-Y: All Children" }, { rating: "TV-G: General Audience" }, { rating: "TV-PG: Parental Guidance Suggested" }, { rating: "TV-MA: Mature Audience Only" }])
 puts "Seeding rating..."
 ###################################
-Program.destroy_all
 
 Program.create([
   {
@@ -171,7 +172,6 @@ Program.create([
 ])
 puts "Seeding program..."
 ###################################
-Review.destroy_all
 
 # Create 100 random reviews
 100.times do

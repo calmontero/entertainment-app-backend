@@ -22,10 +22,12 @@ ActiveRecord::Schema.define(version: 2021_09_11_144846) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "profile_id", null: false
-    t.integer "program_id", null: false
+    t.bigint "profile_id", null: false
+    t.bigint "program_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["profile_id"], name: "index_favorites_on_profile_id"
+    t.index ["program_id"], name: "index_favorites_on_program_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -35,11 +37,12 @@ ActiveRecord::Schema.define(version: 2021_09_11_144846) do
   end
 
   create_table "profiles", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.string "name"
     t.string "avatar"
-    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "programs", force: :cascade do |t|
@@ -82,5 +85,8 @@ ActiveRecord::Schema.define(version: 2021_09_11_144846) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "favorites", "profiles"
+  add_foreign_key "favorites", "programs"
+  add_foreign_key "profiles", "users"
   add_foreign_key "reviews", "programs"
 end

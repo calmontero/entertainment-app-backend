@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
   resources :ratings, only: [:index, :show]
-  resources :genres, only: [:index, :show]
-  resources :categories, only: [:index, :show]
+  resources :genres, only: [:index]
+  resources :categories, only: [:index]
+  resources :favorites, only: [:index, :show]
+  resources :profiles, only: [:index, :show, :create]
+  get "/users", to: "users#index"
   resources :reviews
-  resources :favorites
-  resources :programs
-  resources :profiles
-  resources :users
+  resources :programs  
+
+  # Login/Logout Session
+  post "/signup", to: "users#create"
+  get "/me", to: "users#show"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

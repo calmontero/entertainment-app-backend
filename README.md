@@ -28,6 +28,7 @@ Things you may want to cover:
 - Models [X]
 - Seed data [X]
 - Controller actions []
+- Serializer []
 - View Logic []	
 - Data Fetching []			
 - Styling []

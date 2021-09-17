@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :genres, only: [:index]
   resources :categories, only: [:index]
   resources :favorites, only: [:index, :show]
-  resources :profiles, only: [:index, :show, :create]
+  resources :profiles
   get "/users", to: "users#index"
   resources :reviews, only: [:index, :show, :create]
   resources :programs  

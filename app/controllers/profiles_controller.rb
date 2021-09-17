@@ -13,14 +13,21 @@ class ProfilesController < ApplicationController
     end
 
     def create
-        profile = profile.create!(profile_params)
+        profile = Profile.create!(profile_params)
         render json: profile, status: :created
+    end
+
+    # DELETE /profile/:id
+    def destroy
+        profile = Profile.find(params[:id])
+        profile.destroy
+        head :no_content
     end
 
     private
     
     def profile_params
-        params.permit(:name, :avatar)
+        params.permit(:name, :avatar, :user_id)
     end
     
     def render_not_found_response

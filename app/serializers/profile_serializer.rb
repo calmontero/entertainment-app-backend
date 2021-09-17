@@ -1,5 +1,7 @@
 class ProfileSerializer < ActiveModel::Serializer
-  attributes :id, :name, :avatar
+  attributes :id, :name, :avatar, :user_id
   
-  has_many :favorites
+  belongs_to :user
+  has_many :favorites, dependent: :destroy
+  has_many :programs, through: :favorites
 end

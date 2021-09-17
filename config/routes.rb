@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :favorites, only: [:index, :show]
   resources :profiles, only: [:index, :show, :create]
   get "/users", to: "users#index"
-  resources :reviews
+  resources :reviews, only: [:index, :show, :create]
   resources :programs  
 
   # Login/Logout Session

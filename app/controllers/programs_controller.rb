@@ -4,23 +4,23 @@ class ProgramsController < ApplicationController
     # GET /programs
     def index
         programs = Program.all
-        render json: programs, include: :categories, except: [:created_at, :updated_at]
+        render json: programs, except: [:created_at, :updated_at]
     end
 
     def show
-        program = program.find(params[:id])
+        program = Program.find(params[:id])
         render json: program, except: [:created_at, :updated_at]
     end
 
     def create
-        program = program.create!(program_params)
+        program = Program.create!(program_params)
         render json: program, status: :created
     end
 
     private
 
     def program_params
-        params.permit(:title, :year, :length, :director, :cast, :image_url, :imdb_url, :category_id, :genre_id, :rating_id)
+        params.permit(:title, :year, :description, :length, :director, :cast, :image_url, :imdb_url, :category_id, :genre_id, :rating_id)
     end
     
     def render_not_found_response

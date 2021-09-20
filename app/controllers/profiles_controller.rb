@@ -3,8 +3,13 @@ class ProfilesController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     # GET /profiles
     def index
-        profiles = Profile.all
-        render json: profiles, except: [:created_at, :updated_at]
+        if params[:user_id]
+            user = find_user
+            profiles = user.profile
+        else
+            profiles = Profile.all
+        end
+        render json: profiles, include: :user
     end
 
     def show
@@ -13,14 +18,14 @@ class ProfilesController < ApplicationController
     end
 
     def create
-        profile = Profile.create!(profile_params)
+        user = find_user
+        profile = user.profile.create!(profile_params)
         render json: profile, status: :created
     end
 
-    # DELETE /profile/:id
     def destroy
-        profile = Profile.find(params[:id])
-        profile.destroy
+        user = find_user
+        profile = user.profile.destroy(Profile.find(params[:id]))
         head :no_content
     end
 
@@ -30,6 +35,10 @@ class ProfilesController < ApplicationController
         params.permit(:name, :avatar, :user_id)
     end
     
+    def find_user
+        User.find(params[:user_id])
+    end
+
     def render_not_found_response
         render json: { error: "profile not found" }, status: :not_found
     end

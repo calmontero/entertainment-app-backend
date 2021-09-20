@@ -12,8 +12,17 @@ class FavoritesController < ApplicationController
         render json: favorite, except: [:created_at, :updated_at]
     end
 
+    def create
+        favorite = Favorite.create!(favorite_params)
+        render json: favorite, status: :created
+    end
+
     private
     
+    def favorite_params
+        params.permit(:profile_id, :program_id)
+    end    
+
     def render_not_found_response
         render json: { error: "favorite not found" }, status: :not_found
     end

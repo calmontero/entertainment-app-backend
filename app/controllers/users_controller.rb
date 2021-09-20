@@ -9,6 +9,8 @@ class UsersController < ApplicationController
   
     def show
       render json: @current_user
+      #user = User.find_by(id: params[:id])
+      #render json: user, include: :profiles
     end
   
     def index
